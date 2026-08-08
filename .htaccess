@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Canonical clean URL: send anyone who lands on /lgs.html to /lgs
+RewriteCond %{THE_REQUEST} \s/+lgs\.html[\s?] [NC]
+RewriteRule ^lgs\.html$ /lgs [R=301,L]
+
+# Serve lgs.html when /lgs is requested, without changing the address bar
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^lgs/?$ lgs.html [L]

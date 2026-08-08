@@ -1,0 +1,21 @@
+/* Site customizations layered on top of the vendor template */
+
+/* Footer contact links (phone/email/address) sit inside a running line of
+   text, so they must not inherit the wide side-margins and underline
+   treatment built for the standalone social links in the same footer row. */
+.des-footer-bottom .footer-contact-link {
+  margin: 0;
+  position: static;
+}
+.des-footer-bottom .footer-contact-link::after {
+  content: none;
+}
+
+/* Small breathing room between the phone / email / address rows in the footer. */
+.footer-contact-row {
+  display: block;
+  margin-bottom: 6px;
+}
+.footer-contact-row:last-child {
+  margin-bottom: 0;
+}
