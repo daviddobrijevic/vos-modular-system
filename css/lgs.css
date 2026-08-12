@@ -290,7 +290,17 @@
 }
 
 @media (max-width: 1200px) {
+  /* `.lgs2-hero-content` normally fills the hero via `height: 100%`, which
+     only resolves against a parent with a definite (non-auto) height. Below
+     767px `.lgs2-hero` switches to `height: auto`, so that percentage stops
+     working and the content sits wherever its own height ends up instead of
+     pinned to the bottom. `position: absolute; inset: 0` fills the parent's
+     rendered box directly regardless of how that height was arrived at, so
+     the bottom-left placement holds at every width under 1200px. */
   .lgs2-hero-content {
+    position: absolute;
+    inset: 0;
+    height: auto;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
@@ -301,28 +311,60 @@
     flex-basis: auto;
     width: 100%;
   }
+  .lgs2-heading {
+    margin-bottom: 3rem;
+  }
   .lgs2-card-grid {
     grid-template-columns: 1fr;
   }
   .lgs2-process-row {
     flex-direction: column;
   }
-  /* Below the desktop pin breakpoint the image is static, not sticky —
-     and text leads, image follows (see .lgs2-process-content/-media order). */
-  .lgs2-process-content {
-    order: 1;
-  }
+  /* Below the desktop pin breakpoint there's no sticky image swap — each
+     step carries its own image directly beneath its text instead, so the
+     desktop's shared sticky panel is hidden entirely here. */
   .lgs2-process-media {
-    order: 2;
-    position: static;
-    width: 100%;
-    height: 320px;
+    display: none;
+  }
+  .lgs2-process-step,
+  .lgs2-process-step:last-of-type {
+    min-height: 0;
+    padding: 32px 0;
+  }
+  .lgs2-process-step-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #171717;
+  }
+  .lgs2-process-step-image span {
+    font-family: var(--tp-ff-heading);
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
   }
   .lgs2-gallery-row {
     flex-direction: column;
+    align-items: stretch;
   }
   .lgs2-gallery-img {
     width: 100%;
+  }
+}
+
+/* The per-step mobile image only exists below the 1200px pin breakpoint —
+   above it, the shared sticky panel (`.lgs2-process-media`) is the only
+   image shown, so this stays hidden. A min-width query (rather than just
+   placing this before the max-width block above) keeps it correct
+   regardless of source order. */
+@media (min-width: 1201px) {
+  .lgs2-process-step-image {
+    display: none;
   }
 }
 
