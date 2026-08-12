@@ -228,11 +228,11 @@
                 <!-- lgs hero start -->
                 <div class="lgs2-hero">
                     <div class="container container-1750 lgs2-hero-content">
-                        <div class="lgs2-hero-title-col">
+                        <div class="lgs2-hero-title-col lgs2-reveal" data-delay=".3">
                             <span class="lgs2-hero-script">Light Gauge Steel</span>
                             <h1 class="lgs2-hero-title">LGS Konstrukcije</h1>
                         </div>
-                        <div class="lgs2-hero-side">
+                        <div class="lgs2-hero-side lgs2-reveal" data-delay=".5">
                             <p class="lgs2-hero-desc">Vaš Modular System razvija i proizvodi <strong>LGS konstrukcije</strong> putem digitalno integrisanog sistema projektovanja i <strong>CNC proizvodnje</strong>.</p>
                             <a class="lgs2-btn" href="#lgs2-intro">SAZNAJ VIŠE <img src="images/lgs2-arrow.svg" alt=""></a>
                         </div>
@@ -243,30 +243,30 @@
                 <!-- intro / feature cards start -->
                 <div class="lgs2-section pt-100 pb-100" id="lgs2-intro">
                     <div class="container container-1750">
-                        <h2 class="lgs2-heading">Digitalno projektovanje i CNC proizvodnja nove generacije</h2>
+                        <h2 class="lgs2-heading lgs2-reveal">Digitalno projektovanje i CNC proizvodnja nove generacije</h2>
                         <div class="lgs2-card-grid">
-                            <div class="lgs2-card">
+                            <div class="lgs2-card lgs2-reveal" data-delay=".1">
                                 <div class="lgs2-card-top">
                                     <h3 class="lgs2-card-title">Digitalno projektovanje</h3>
                                     <div class="lgs2-card-icon"><img src="images/lgs2-icon-digital.svg" alt=""></div>
                                 </div>
                                 <p class="lgs2-card-desc">Napredna CAD/CAM priprema omogućava potpunu preciznost, digitalnu simulaciju i eliminaciju grešaka pre same proizvodnje.</p>
                             </div>
-                            <div class="lgs2-card">
+                            <div class="lgs2-card lgs2-reveal" data-delay=".2">
                                 <div class="lgs2-card-top">
                                     <h3 class="lgs2-card-title">CNC proizvodnja</h3>
                                     <div class="lgs2-card-icon"><img src="images/lgs2-icon-cnc.svg" alt=""></div>
                                 </div>
                                 <p class="lgs2-card-desc">Potpuno automatizovana izrada LGS čeličnih profila na savremenim Arkitech mašinama visoke efikasnosti.</p>
                             </div>
-                            <div class="lgs2-card">
+                            <div class="lgs2-card lgs2-reveal" data-delay=".3">
                                 <div class="lgs2-card-top">
                                     <h3 class="lgs2-card-title">Visoka preciznost</h3>
                                     <div class="lgs2-card-icon"><img src="images/lgs2-icon-precision.svg" alt=""></div>
                                 </div>
                                 <p class="lgs2-card-desc">Milimetarska tačnost sečenja, štancovanja i perforacije za besprekorno uklapanje svih elemenata na terenu.</p>
                             </div>
-                            <div class="lgs2-card">
+                            <div class="lgs2-card lgs2-reveal" data-delay=".4">
                                 <div class="lgs2-card-top">
                                     <h3 class="lgs2-card-title">Kvalitet i pouzdanost</h3>
                                     <div class="lgs2-card-icon"><img src="images/lgs2-icon-quality.svg" alt=""></div>
@@ -289,7 +289,7 @@
                                 <div class="lgs2-process-media-frame" data-step="4"><span>Slika koraka 4</span></div>
                             </div>
                             <div class="lgs2-process-content" id="lgs2-process-content">
-                                <div class="lgs2-process-heading">
+                                <div class="lgs2-process-heading lgs2-reveal">
                                     <span class="lgs2-hero-script" style="font-size:32px;">Proces</span>
                                     <h2 class="lgs2-heading" style="margin-bottom:0;">Od digitalnog modela do gotovog čeličnog sklopa u četiri jednostavna koraka.</h2>
                                 </div>
@@ -318,7 +318,7 @@
                 <!-- gallery / benefits start -->
                 <div class="lgs2-section pt-100 pb-100">
                     <div class="container container-1750">
-                        <div class="lgs2-gallery-row">
+                        <div class="lgs2-gallery-row lgs2-reveal">
                             <div class="lgs2-gallery-col">
                                 <h2 class="lgs2-heading" style="margin-bottom:24px;">Prednosti VOS LGS sistema</h2>
                                 <ul class="lgs2-check-list">
@@ -497,6 +497,34 @@
             end: isLast ? 'center ' + MEDIA_CENTER_PX + 'px' : 'bottom ' + SWAP_LINE,
             onToggle: function (self) {
               if (self.isActive) setActive(step.getAttribute('data-step'));
+            },
+          });
+        });
+      });
+    </script>
+    <script>
+      // Scroll-in reveal for this page's sections. Not using the theme's
+      // own .tp_fade_anim utility here: on this site it creates the tween
+      // correctly but its single-word toggleActions ("play" instead of
+      // GSAP's expected 4-word "play none none none") leaves the tween
+      // stuck at progress 0 forever, so the content it's attached to never
+      // becomes visible again — confirmed on the homepage hero too, not
+      // something specific to this page. This block is a small, separately
+      // verified replacement with the same fade-up-on-scroll look.
+      window.addEventListener('load', function () {
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.utils.toArray('.lgs2-reveal').forEach(function (el) {
+          var delay = parseFloat(el.getAttribute('data-delay')) || 0;
+          gsap.fromTo(el, { opacity: 0, y: 40 }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            delay: delay,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
             },
           });
         });

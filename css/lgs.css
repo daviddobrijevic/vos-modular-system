@@ -33,6 +33,10 @@
   color: var(--tp-common-orange);
   font-size: 48px;
   line-height: 1.2;
+  /* The script font's opening "L" swash draws ~9px to the left of its own
+     box at this size, so the left edge looks offset from the container
+     even though the box itself is aligned. Nudge it right to compensate. */
+  margin-left: 9px;
   text-transform: capitalize;
 }
 .lgs2-hero-title {
@@ -198,10 +202,6 @@
   flex-direction: column;
   justify-content: center;
   padding: 60px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.lgs2-process-step:first-of-type {
-  border-top: none;
 }
 /* The last step's own trigger ends at its vertical center (see the pin
    setup in lgs.html), not its bottom — a shorter box here means less
