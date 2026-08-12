@@ -463,13 +463,13 @@
         // the boundary crosses it.
         var SWAP_LINE = '35%';
 
-        // The pin must stay engaged for exactly as long as any step is
-        // active. Steps activate/deactivate on 'top'/'bottom' at
-        // SWAP_LINE, so the pin's end has to match the last step's own
-        // end at that same line — tying it to the content column's
-        // 'bottom bottom' instead made the pin let go before the last
-        // step finished (the gap grows with viewport height, which is why
-        // it only showed up clearly on larger screens).
+        // The pinned image sits at a fixed 'top 110' with a 560px height —
+        // its own visual center is at 110 + 560/2 = 390px down the
+        // viewport, NOT the viewport's true center (450px, which is what
+        // 'center center' would have used). The section should end when
+        // the last step's text is centered against that image, so the end
+        // condition has to target 390px specifically, not viewport-center.
+        var MEDIA_CENTER_PX = 110 + 560 / 2;
         var lastStep = steps[steps.length - 1];
         ScrollTrigger.matchMedia({
           '(min-width: 1201px)': function () {
@@ -477,7 +477,7 @@
               trigger: '#lgs2-process-content',
               start: 'top 110',
               endTrigger: lastStep,
-              end: 'bottom ' + SWAP_LINE,
+              end: 'center ' + MEDIA_CENTER_PX + 'px',
               pin: '#lgs2-process-media',
             });
           },
@@ -485,12 +485,16 @@
 
         // Step activation runs through ScrollTrigger too (not
         // IntersectionObserver) — the same engine already tracking this
-        // page's GSAP-driven scroll position for the pin above.
-        steps.forEach(function (step) {
+        // page's GSAP-driven scroll position for the pin above. The last
+        // step's own end matches the pin's end above (both target the
+        // image's visual center) so the highlighted text and the pin
+        // release together, right where the text sits centered on the image.
+        steps.forEach(function (step, i) {
+          var isLast = i === steps.length - 1;
           ScrollTrigger.create({
             trigger: step,
             start: 'top ' + SWAP_LINE,
-            end: 'bottom ' + SWAP_LINE,
+            end: isLast ? 'center ' + MEDIA_CENTER_PX + 'px' : 'bottom ' + SWAP_LINE,
             onToggle: function (self) {
               if (self.isActive) setActive(step.getAttribute('data-step'));
             },

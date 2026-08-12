@@ -49,9 +49,11 @@
   margin-bottom: 0;
 }
 
-/* Navbar top spacing — replaces the theme's mt-5 (5px) with more breathing
-   room above the logo/menu row, shared by every page via partials/header.html. */
+/* Navbar spacing — replaces the theme's mt-5 (5px margin) with 16px of
+   real padding above and below the logo/menu row, shared by every page
+   via partials/header.html. */
 .header-nav-spacing {
-  margin-top: 16px;
-  padding-bottom: 8px;
+  margin-top: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }

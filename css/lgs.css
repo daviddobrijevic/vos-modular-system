@@ -203,6 +203,14 @@
 .lgs2-process-step:first-of-type {
   border-top: none;
 }
+/* The last step's own trigger ends at its vertical center (see the pin
+   setup in lgs.html), not its bottom — a shorter box here means less
+   left-over height scrolling past after the pin releases, so the section
+   hands off to the next one right around that centered moment instead of
+   dragging on with a static, no-longer-pinned image underneath it. */
+.lgs2-process-step:last-of-type {
+  min-height: 300px;
+}
 .lgs2-step-num {
   display: inline-flex;
   align-items: center;
