@@ -296,7 +296,9 @@
      working and the content sits wherever its own height ends up instead of
      pinned to the bottom. `position: absolute; inset: 0` fills the parent's
      rendered box directly regardless of how that height was arrived at, so
-     the bottom-left placement holds at every width under 1200px. */
+     the bottom-left placement holds at every width under 1200px. Every
+     piece (script line, title, description, button) stacks tightly with
+     only 0.75rem between each. */
   .lgs2-hero-content {
     position: absolute;
     inset: 0;
@@ -305,11 +307,12 @@
     align-items: flex-start;
     justify-content: flex-end;
     padding-top: 140px;
-    gap: 24px;
+    gap: 0.75rem;
   }
   .lgs2-hero-side {
     flex-basis: auto;
     width: 100%;
+    gap: 0.75rem;
   }
   .lgs2-heading {
     margin-bottom: 3rem;
