@@ -307,6 +307,10 @@
     align-items: flex-start;
     justify-content: flex-end;
     padding-top: 140px;
+    /* Overrides the desktop rule's 90px — that plus the next section's own
+       top padding was leaving a large dead gap below the button on short
+       mobile heroes. */
+    padding-bottom: 32px;
     gap: 0.75rem;
   }
   .lgs2-hero-side {
