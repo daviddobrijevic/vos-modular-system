@@ -76,9 +76,14 @@
   font-size: 15px;
   line-height: 1;
   color: #fff;
-  background-image: linear-gradient(#0d0d0d, #0d0d0d), linear-gradient(90deg, #ff8c00, #995400);
+  background-image: linear-gradient(#ff9903, #ff9903), linear-gradient(90deg, #ff8c00, #995400);
   background-origin: border-box;
   background-clip: padding-box, border-box;
+}
+.lgs2-btn,
+.lgs2-btn:hover,
+.lgs2-btn:focus {
+  color: #fff;
 }
 .lgs2-btn img {
   width: 18px;

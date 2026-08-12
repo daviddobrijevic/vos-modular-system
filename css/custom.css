@@ -48,3 +48,10 @@
 .footer-contact-row:last-child {
   margin-bottom: 0;
 }
+
+/* Navbar top spacing — replaces the theme's mt-5 (5px) with more breathing
+   room above the logo/menu row, shared by every page via partials/header.html. */
+.header-nav-spacing {
+  margin-top: 16px;
+  padding-bottom: 8px;
+}

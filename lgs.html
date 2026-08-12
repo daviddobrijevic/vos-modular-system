@@ -148,7 +148,7 @@
     <header>
 
         <!-- header area start -->
-        <div class="tp-header-2-area z-index-3 mt-5 ">
+        <div class="tp-header-2-area z-index-3 header-nav-spacing ">
             <div class="container container-1750">
                 <div class="row align-items-center">
                     <div class="col-6">
@@ -455,10 +455,18 @@
           });
         }
 
+        // The step-swap line sits at 35% down the viewport instead of
+        // dead center (50%). Scrolling down moves content UP the screen,
+        // so a smaller % (higher up, closer to the top) needs *more*
+        // scroll to reach — that's what delays the swap, holding the
+        // current step/image past center instead of swapping right when
+        // the boundary crosses it.
+        var SWAP_LINE = '35%';
+
         // The pin must stay engaged for exactly as long as any step is
-        // active. Steps activate/deactivate on 'top center' / 'bottom
-        // center' of each step element, so the pin's end has to match the
-        // last step's 'bottom center' — tying it to the content column's
+        // active. Steps activate/deactivate on 'top'/'bottom' at
+        // SWAP_LINE, so the pin's end has to match the last step's own
+        // end at that same line — tying it to the content column's
         // 'bottom bottom' instead made the pin let go before the last
         // step finished (the gap grows with viewport height, which is why
         // it only showed up clearly on larger screens).
@@ -469,7 +477,7 @@
               trigger: '#lgs2-process-content',
               start: 'top 110',
               endTrigger: lastStep,
-              end: 'bottom center',
+              end: 'bottom ' + SWAP_LINE,
               pin: '#lgs2-process-media',
             });
           },
@@ -481,8 +489,8 @@
         steps.forEach(function (step) {
           ScrollTrigger.create({
             trigger: step,
-            start: 'top center',
-            end: 'bottom center',
+            start: 'top ' + SWAP_LINE,
+            end: 'bottom ' + SWAP_LINE,
             onToggle: function (self) {
               if (self.isActive) setActive(step.getAttribute('data-step'));
             },
