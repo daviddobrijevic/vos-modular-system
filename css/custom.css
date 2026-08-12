@@ -1,5 +1,34 @@
 /* Site customizations layered on top of the vendor template */
 
+/* ---------------------------------------------------------------------
+   PAGE LAYOUT CONVENTION — read this before building a new page section.
+
+   Every full-width section on this site follows the same pattern:
+
+     <div class="SOME-SECTION-NAME pt-100 pb-100">
+       <div class="container container-1750">
+         ... section content ...
+       </div>
+     </div>
+
+   - `container container-1750` (both classes together) is the site's real
+     grid: Bootstrap's responsive side-gutter at normal widths (15px at
+     e.g. 1440px), capped at a 1750px-wide row with 85px edges only once
+     the viewport is wide enough (~1920px+). This is what the header and
+     the homepage's wide sections already use — reuse it, don't hardcode
+     side padding in px, even if a Figma frame says otherwise. Figma frame
+     widths don't map 1:1 to this site's actual breakpoints.
+   - `pt-*` / `pb-*` are the site's existing spacing utilities (5px
+     steps, css/spacing.css) — reuse those for vertical rhythm instead of
+     inventing new padding values.
+   - Narrower text-only content can use plain `.container` instead of
+     `container-1750`, matching how the homepage hero does it.
+
+   Verify alignment by comparing a new section's left edge to the header
+   logo's left edge at a couple of real viewport widths (1440px and
+   1920px are good spot checks) — not just the widest one.
+   --------------------------------------------------------------------- */
+
 /* Footer contact links (phone/email/address) sit inside a running line of
    text, so they must not inherit the wide side-margins and underline
    treatment built for the standalone social links in the same footer row. */
