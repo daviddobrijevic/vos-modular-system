@@ -46,7 +46,7 @@
   text-transform: uppercase;
   font-size: 64px;
   line-height: 1.05;
-  margin: 0;
+  margin: 0.5rem 0 0;
 }
 .lgs2-hero-side {
   flex: 0 0 480px;
