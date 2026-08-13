@@ -313,6 +313,15 @@
     padding-bottom: 32px;
     gap: 0.75rem;
   }
+  /* Desktop uses `flex: 1 1 0` so the title column grows to fill the
+     horizontal space beside `.lgs2-hero-side`. In this column layout that
+     same rule grows it to fill the leftover VERTICAL space instead, which
+     stretched it from the top of the hero all the way down and left the
+     script/title text stuck up there while the description and button
+     (never given flex-grow) correctly sat at the bottom. */
+  .lgs2-hero-title-col {
+    flex: none;
+  }
   .lgs2-hero-side {
     flex-basis: auto;
     width: 100%;
