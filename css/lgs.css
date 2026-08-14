@@ -181,12 +181,12 @@
 .lgs2-process-media-frame.is-active {
   opacity: 1;
 }
-.lgs2-process-media-frame span {
-  font-family: var(--tp-ff-heading);
-  font-size: 15px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.25);
+.lgs2-process-media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 40px;
 }
 
 .lgs2-process-content {
@@ -357,12 +357,12 @@
     overflow: hidden;
     background: #171717;
   }
-  .lgs2-process-step-image span {
-    font-family: var(--tp-ff-heading);
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.25);
+  .lgs2-process-step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 20px;
   }
   .lgs2-gallery-row {
     flex-direction: column;
