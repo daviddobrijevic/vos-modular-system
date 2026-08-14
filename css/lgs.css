@@ -46,7 +46,7 @@
   font-weight: 500;
   color: #f0ede6;
   text-transform: uppercase;
-  font-size: 64px;
+  font-size: 80px;
   line-height: 1.05;
   margin: 0.5rem 0 0;
 }
@@ -59,7 +59,7 @@
 }
 .lgs2-hero-desc {
   font-family: var(--tp-ff-body);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
   color: #d4c8bc;
   margin: 0;
