@@ -489,16 +489,21 @@
 
         // Step activation runs through ScrollTrigger too (not
         // IntersectionObserver) — the same engine already tracking this
-        // page's GSAP-driven scroll position for the pin above. The last
-        // step's own end matches the pin's end above (both target the
-        // image's visual center) so the highlighted text and the pin
-        // release together, right where the text sits centered on the image.
-        steps.forEach(function (step, i) {
-          var isLast = i === steps.length - 1;
+        // page's GSAP-driven scroll position for the pin above. Every step
+        // uses the same percentage-based start/end (a viewport-relative
+        // window that scales with the step's own height), so each one gets
+        // a comfortably wide activation range. The last step used to end at
+        // the pin's exact pixel-based release point instead — a window that
+        // shrinks as viewport height drops (only ~12px tall on a 720px-tall
+        // screen, e.g. a MacBook Air), narrow enough that a normal scroll
+        // could skip over it entirely and leave the 4th image never marked
+        // active. Decoupling it from the pin's timing fixes that; the pin
+        // itself still releases at the precise pixel position separately.
+        steps.forEach(function (step) {
           ScrollTrigger.create({
             trigger: step,
             start: 'top ' + SWAP_LINE,
-            end: isLast ? 'center ' + MEDIA_CENTER_PX + 'px' : 'bottom ' + SWAP_LINE,
+            end: 'bottom ' + SWAP_LINE,
             onToggle: function (self) {
               if (self.isActive) setActive(step.getAttribute('data-step'));
             },
